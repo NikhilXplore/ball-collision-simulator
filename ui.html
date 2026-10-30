@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Collision Simulator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 24px;
+            font-family: system-ui, "Segoe UI", sans-serif;
+            background-color: #eef1f6;
+            color: #1f2933;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        /* main layout: playground left, controls right */
+        #app {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        /* ---------- left: playground + display ---------- */
+        #playground {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        canvas {
+            width: 1000px;
+            height: 610px;
+            background-color: aliceblue;
+            border: 2px solid #c8d3e0;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        #display {
+            display: flex;
+            gap: 24px;
+            padding: 16px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        #display .stat {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        #display .stat .label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #7b8794;
+        }
+
+        #display .stat .value {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        /* ---------- right: controls ---------- */
+        #controler {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 260px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        #controler h2 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #7b8794;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .control-group label {
+            font-size: 14px;
+        }
+
+        .control-group input[type="range"] {
+            width: 100%;
+        }
+
+        .control-group button {
+            padding: 8px 12px;
+            font-size: 14px;
+            border: 1px solid #c8d3e0;
+            border-radius: 6px;
+            background-color: #f5f7fa;
+            cursor: pointer;
+        }
+
+        .control-group button:hover {
+            background-color: #e4e9f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Collision Simulator</h1>
+
+    <div id="app">
+        <div id="playground">
+            <canvas></canvas>
+
+            <div id="display">
+                <div class="stat">
+                    <span class="label">Balls</span>
+                    <span class="value" id="stat-balls">0</span>
+                </div>
+                <div class="stat">
+                    <span class="label">Collisions</span>
+                    <span class="value" id="stat-collisions">0</span>
+                </div>
+                <div class="stat">
+                    <span class="label">FPS</span>
+                    <span class="value" id="stat-fps">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="controler">
+            <h2>Controls</h2>
+
+            <div class="control-group">
+                <label for="ball-count">Ball Count</label>
+                <input type="range" id="ball-count" min="1" max="100" value="20">
+            </div>
+
+            <div class="control-group">
+                <label for="speed">Speed</label>
+                <input type="range" id="speed" min="1" max="20" value="10">
+            </div>
+
+            <div class="control-group">
+                <label for="radius">Radius</label>
+                <input type="range" id="radius" min="5" max="50" value="20">
+            </div>
+
+            <div class="control-group">
+                <button id="toggle-run">Pause</button>
+                <button id="reset">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./js/main.js"></script>
+</body>
+</html>
