@@ -9,7 +9,7 @@ export class renderWorld{
     }
     drawBall(ball){
         this.ctx.beginPath()
-        this.ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2)
+        this.ctx.arc(ball.Position.x, ball.Position.y, ball.radius, 0, Math.PI * 2)
         this.ctx.fillStyle = ball.color
         this.ctx.fill()
     }

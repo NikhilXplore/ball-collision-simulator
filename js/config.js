@@ -1,5 +1,5 @@
 export const CONFIG = {
-    ballNumber: 20,
-    radius: 20,
-    speed: 10,
+    ballNumber: 5,
+    radius: 30,
+    speed: 5,
 }
