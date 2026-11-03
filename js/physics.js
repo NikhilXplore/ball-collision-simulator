@@ -3,13 +3,20 @@ export class physicsWorld {
         this.width = width;
         this.height = height;
         this.balls = [];
+        this.dt = 1;
+        this.e = 1;
     }
 
     addBall(ball) {
         this.balls.push(ball);
     }
 
-    update(KE) {
+    resetWorld(){
+        this.balls.length = 0;
+    }
+
+    update(dt) {
+        this.dt = dt;
 
         // Stage 1: Move all balls and resolve wall collisions
         for (const ball of this.balls) {
@@ -29,21 +36,17 @@ export class physicsWorld {
             }
         }
 
-        // Stage 3: Calculate total kinetic energy
-        let CKE = 0;
+    }
+    kineticEnergy(){
+        let KE = 0;
 
         for (const ball of this.balls) {
             const { dx, dy } = ball.velocity;
 
-            CKE += 0.5 * ball.mass * (dx * dx + dy * dy);
+            KE += 0.5 * ball.mass * (dx * dx + dy * dy);
         }
 
-        if (Math.abs(CKE - KE) > 0.001) {
-            console.log("Energy difference:", CKE - KE);
-            console.log(CKE);
-        }
-
-        return CKE;
+        return Math.round(KE * 100)/100;
     }
     #collisionDetection(ball1, ball2) {
         if (Math.hypot((ball1.Position.x - ball2.Position.x), (ball1.Position.y - ball2.Position.y)) <= ball2.radius + ball1.radius) {
@@ -53,8 +56,8 @@ export class physicsWorld {
         }
     }
     #wallCollision(ball) {
-        ball.Position.x = (ball.Position.x + ball.velocity.dx);
-        ball.Position.y = (ball.Position.y + ball.velocity.dy);
+        ball.Position.x = (ball.Position.x + ball.velocity.dx*this.dt);
+        ball.Position.y = (ball.Position.y + ball.velocity.dy*this.dt);
 
         if (ball.Position.x + ball.radius >= this.width) {
             ball.Position.x = this.width - ball.radius;
@@ -96,7 +99,6 @@ export class physicsWorld {
         ball2.Position.y += C * (1 / ball2.mass) * n.y;
 
 
-
         // find relative velocity vrel = v2 - v1 with respect to ball1
         const vrel = { x: ball2.velocity.dx - ball1.velocity.dx, y: ball2.velocity.dy - ball1.velocity.dy }
 
@@ -105,8 +107,7 @@ export class physicsWorld {
         if (vrn >= 0) return;
 
         // calculate impulse magnitude.
-        const e = 1;
-        const j = (-1 * (1 + e) * vrn) / (1 / ball1.mass + 1 / ball2.mass);
+        const j = (-1 * (1 + this.e) * vrn) / (1 / ball1.mass + 1 / ball2.mass);
         const Jvector = { x: j * n.x, y: j * n.y };
 
         // change velocities 
@@ -115,8 +116,6 @@ export class physicsWorld {
 
         ball2.velocity.dx += Jvector.x / ball2.mass;
         ball2.velocity.dy += Jvector.y / ball2.mass;
-
-
     }
 
 }

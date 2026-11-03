@@ -1,5 +1,5 @@
 export class Ball{
-    constructor(cx, cy, radius = 20, speed = 10, theta = 30, color = "red", mass = 1){
+    constructor(cx, cy, radius = 20, speed = 1000, theta = 30, color = "red", mass = 1){
         this.Position = {x: cx, y: cy};
         this.radius = radius;
         this.theta = theta * Math.PI/180;

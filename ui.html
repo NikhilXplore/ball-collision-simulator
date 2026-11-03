@@ -19,8 +19,8 @@
                     <span class="value" id="stat-balls">0</span>
                 </div>
                 <div class="stat">
-                    <span class="label">Collisions</span>
-                    <span class="value" id="stat-collisions">0</span>
+                    <span class="label">Kinetic Energy</span>
+                    <span class="value" id="stat-KE">0</span>
                 </div>
                 <div class="stat">
                     <span class="label">FPS</span>
@@ -33,18 +33,18 @@
             <h2>Controls</h2>
 
             <div class="control-group">
-                <label for="ball-count">Ball Count</label>
-                <input type="range" id="ball-count" min="1" max="100" value="20">
+                <label for="ball-count">Add Ball</label>
+                <button id="add-ball">Add Ball</button>
             </div>
 
             <div class="control-group">
                 <label for="speed">Speed</label>
-                <input type="range" id="speed" min="1" max="20" value="10">
+                <input type="range" id="speed" min="0" max="5" step="0.5" value="1">
             </div>
 
             <div class="control-group">
-                <label for="radius">Radius</label>
-                <input type="range" id="radius" min="5" max="50" value="20">
+                <label for="restitution">Restitution</label>
+                <input type="range" id="restitution" min="0" max="1" step="0.1" value="1">
             </div>
 
             <div class="control-group">

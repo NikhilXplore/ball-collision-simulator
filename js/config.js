@@ -1,5 +1,5 @@
 export const CONFIG = {
-    ballNumber: 5,
-    radius: 30,
-    speed: 5,
+    ballNumber: 2,
+    radius: 50,
+    speed: 500,         // pixel per second
 }
